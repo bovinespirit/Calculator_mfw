@@ -14,3 +14,5 @@ RESOURCES += \
 
 OTHER_FILES += \
     style.css
+
+QT += script

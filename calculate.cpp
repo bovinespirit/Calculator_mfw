@@ -1,4 +1,5 @@
 #include "calculate.h"
+#include <QtScript>
 
 Calculate::Calculate(QObject *parent) :
     QThread(parent),
@@ -27,9 +28,19 @@ void Calculate::run() {
     const QString q = query;
     mutex.unlock();
 
-    sleep(1000);
+    QScriptEngine engine;
+    QScriptValue result;
+    QString op;
 
-    emit haveAnswer("Done!");
+    sleep(1000);
+    result = engine.evaluate(q);
+
+    if (result.isNumber())
+        op = result.toString();
+    else
+        op = "Error!";
+
+    emit haveAnswer(op);
 }
 
 void Calculate::sleep(unsigned long sleepMs) {
