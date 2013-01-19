@@ -2,12 +2,12 @@
 #define CALCULATORWINDOW_H
 
 #include <QWidget>
-#include "calculate.h"
 
 QT_BEGIN_NAMESPACE
 class QLineEdit;
 class QPushButton;
 class QLabel;
+class QVBoxLayout;
 QT_END_NAMESPACE
 
 class CalculatorWindow : public QWidget
@@ -21,14 +21,12 @@ signals:
 private slots:
     void buttonPressed();
     void execute();
-    void calculationDone(const QString& result);
+    void calculationDone();
 
 private:
-    QLabel *history;
+    QVBoxLayout *history;
     QLineEdit *display;
     QPushButton *digitButtons[10];
-
-    Calculate thread;
 };
 
 #endif // CALCULATORWINDOW_H
