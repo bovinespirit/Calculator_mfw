@@ -8,3 +8,9 @@ HEADERS += \
     calculatorwindow.h \
     calculate.h \
     historyitem.h
+
+RESOURCES += \
+    resources.qrc
+
+OTHER_FILES += \
+    style.css
