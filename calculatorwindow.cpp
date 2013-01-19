@@ -42,6 +42,7 @@ CalculatorWindow::CalculatorWindow(QWidget *parent) :
     glayout -> addWidget(button, 6, 3);
 
     display = new QLineEdit("");
+    display->setObjectName("display");
     glayout -> addWidget(display, 2, 0, 1, 4);
 
     QScrollArea* sc = new QScrollArea;
@@ -50,16 +51,16 @@ CalculatorWindow::CalculatorWindow(QWidget *parent) :
     sc -> setWidgetResizable(true);
 
     QFrame* gb = new QFrame();
+    gb -> setObjectName("historyFrame");
     gb -> setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Expanding);
     gb -> setContentsMargins(0, 0, 0, 0);
 
     history = new QVBoxLayout();
-    history -> setSpacing(1);
+    history -> setSpacing(0);
     history -> setSizeConstraint(QLayout::SetMinAndMaxSize);
     gb -> setLayout(history);
-    HistoryItem *label = new HistoryItem("Empty");
-    history -> addWidget(label);
-    sc -> setWidget(gb);
+
+    sc -> setWidget(gb); // This needs to happen after setLayout()
     glayout -> addWidget(sc, 0, 0, 2, 4);
 
     setLayout(glayout);
