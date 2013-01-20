@@ -36,7 +36,7 @@ void Calculate::run() {
     result = engine.evaluate(q);
 
     if (result.isNumber())
-        op = result.toString();
+        op = query + " = " + result.toString();
     else
         op = "Error!";
 

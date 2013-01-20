@@ -42,13 +42,15 @@ CalculatorWindow::CalculatorWindow(QWidget *parent) :
     glayout -> addWidget(button, 6, 3);
 
     display = new QLineEdit("");
-    display->setObjectName("display");
+    display -> setObjectName("display");
+    display -> setReadOnly(true);
+    display -> setMaxLength(12);
+    display -> setPlaceholderText("0");
     glayout -> addWidget(display, 2, 0, 1, 4);
 
-    QScrollArea* sc = new QScrollArea;
-    sc -> setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    sc -> setContentsMargins(0, 0, 0, 0);
-    sc -> setWidgetResizable(true);
+    historyArea = new QScrollArea;
+    historyArea -> setContentsMargins(0, 0, 0, 0);
+    historyArea -> setWidgetResizable(true);
 
     QFrame* gb = new QFrame();
     gb -> setObjectName("historyFrame");
@@ -60,8 +62,8 @@ CalculatorWindow::CalculatorWindow(QWidget *parent) :
     history -> setSizeConstraint(QLayout::SetMinAndMaxSize);
     gb -> setLayout(history);
 
-    sc -> setWidget(gb); // This needs to happen after setLayout()
-    glayout -> addWidget(sc, 0, 0, 2, 4);
+    historyArea -> setWidget(gb); // This needs to happen after setLayout()
+    glayout -> addWidget(historyArea, 0, 0, 2, 4);
 
     setLayout(glayout);
     setWindowTitle(tr("Calculator"));
@@ -83,7 +85,9 @@ void CalculatorWindow::execute() {
         connect(thread, SIGNAL(haveAnswer(QString)),
                 this, SLOT(calculationDone()));
         thread -> setupCalculation(txt);
-        display->setText("");
+        display -> setText("");
+        QScrollBar * const vs = historyArea -> verticalScrollBar();
+        vs -> setValue(vs -> maximum());
     }
 }
 

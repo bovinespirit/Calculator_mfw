@@ -4,9 +4,10 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
+class QLabel;
 class QLineEdit;
 class QPushButton;
-class QLabel;
+class QScrollArea;
 class QVBoxLayout;
 QT_END_NAMESPACE
 
@@ -27,6 +28,7 @@ private:
     QVBoxLayout *history;
     QLineEdit *display;
     QPushButton *digitButtons[10];
+    QScrollArea *historyArea;
 };
 
 #endif // CALCULATORWINDOW_H
