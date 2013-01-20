@@ -19,6 +19,9 @@ public:
     
 signals:
     
+protected:
+    void keyPressEvent(QKeyEvent *);
+
 private slots:
     void buttonPressed();
     void execute();

@@ -96,3 +96,32 @@ void CalculatorWindow::calculationDone() {
     delete sender();
 }
 
+void CalculatorWindow::keyPressEvent(QKeyEvent *ke) {
+    switch (ke -> key()) {
+    case Qt::Key_Equal:
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+        execute();
+        break;
+    case Qt::Key_Minus:
+    case Qt::Key_Plus:
+    case Qt::Key_multiply:
+    case Qt::Key_Asterisk:
+    case Qt::Key_division:
+    case Qt::Key_Slash:
+    case Qt::Key_0:
+    case Qt::Key_1:
+    case Qt::Key_2:
+    case Qt::Key_3:
+    case Qt::Key_4:
+    case Qt::Key_5:
+    case Qt::Key_6:
+    case Qt::Key_7:
+    case Qt::Key_8:
+    case Qt::Key_9:
+        display->setText(display->text() + (ke -> text()));
+        break;
+    default:
+        QWidget::keyPressEvent(ke);
+    }
+}
